@@ -8,7 +8,7 @@ const Certifications: React.FC = () => {
       name: 'ISO 9001',
       description: 'Quality Management System',
       icon: <Award className="w-16 h-16 text-blue-600" />,
-      details: 'Demonstrates our commitment to quality management and continuous improvement in all our processes.',
+      details: 'Demonstrates commitment to quality management and continuous improvement in all processes.',
       pdfUrl: '/pdfs/iso-9001-certificate.pdf'
     },
     {
@@ -79,13 +79,6 @@ const Certifications: React.FC = () => {
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>View Certificate</span>
-                  </button>
-                  <button
-                    onClick={() => handlePdfClick(cert.pdfUrl, cert.name)}
-                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center space-x-2"
-                  >
-                    <Download className="w-4 h-4" />
-                    <span>Download PDF</span>
                   </button>
                 </div>
               </div>

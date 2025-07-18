@@ -7,11 +7,13 @@ import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Certifications from './pages/Certifications';
 import ContactUs from './pages/ContactUs';
+import ScrollToTop from './components/ScrollToTop'; 
 
 function App() {
   return (
     <Router>
       <Layout>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
