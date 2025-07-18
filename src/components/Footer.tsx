@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone, Twitter, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Mail, MapPin, Phone} from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -17,23 +17,9 @@ const Footer: React.FC = () => {
               />
               <h3 className="text-xl font-bold text-green-400">Aminisha Organics LLP</h3>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed">
+            <p className="text-gray-300 text-md leading-relaxed">
               The Aminisha Organics LLP of today is a result of the collective effort of our employees, suppliers, customers and management.
             </p>
-            <div className="flex space-x-3">
-              <div className="w-8 h-8 bg-gray-700 rounded flex items-center justify-center hover:bg-blue-600 transition-colors cursor-pointer">
-                <Twitter className="w-4 h-4" />
-              </div>
-              <div className="w-8 h-8 bg-gray-700 rounded flex items-center justify-center hover:bg-blue-600 transition-colors cursor-pointer">
-                <Facebook className="w-4 h-4" />
-              </div>
-              <div className="w-8 h-8 bg-gray-700 rounded flex items-center justify-center hover:bg-blue-600 transition-colors cursor-pointer">
-                <Instagram className="w-4 h-4" />
-              </div>
-              <div className="w-8 h-8 bg-gray-700 rounded flex items-center justify-center hover:bg-blue-600 transition-colors cursor-pointer">
-                <Linkedin className="w-4 h-4" />
-              </div>
-            </div>
             <div className="pt-4">
               <p className="text-sm text-gray-400">Call Anytime</p>
               <p className="text-lg font-semibold">+91 9428323829</p>

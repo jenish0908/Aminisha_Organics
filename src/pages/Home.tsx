@@ -24,44 +24,15 @@ const Home: React.FC = () => {
   ];
 
   const industries = [
-    { name: "Aerospace & Defense", icon: <Factory className="w-8 h-8" /> },
     { name: "Agriculture", icon: <TreePine className="w-8 h-8" /> },
     { name: "Animal Nutrition", icon: <Beaker className="w-8 h-8" /> },
     { name: "Dyes & Textile", icon: <Truck className="w-8 h-8" /> },
-    { name: "Electronics", icon: <Cpu className="w-8 h-8" /> },
     { name: "Hair Care", icon: <Users className="w-8 h-8" /> },
     { name: "Human Nutrition", icon: <Building2 className="w-8 h-8" /> },
     { name: "Industrial", icon: <Wrench className="w-8 h-8" /> },
     { name: "Oil & Gas", icon: <HardHat className="w-8 h-8" /> },
     { name: "Pharmaceuticals", icon: <Shield className="w-8 h-8" /> },
     { name: "Polymer", icon: <Zap className="w-8 h-8" /> }
-  ];
-
-  const news = [
-    {
-      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
-      title: "Heavy stocked finding the best products",
-      date: "AUG 15, 2019",
-      category: "Business"
-    },
-    {
-      image: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
-      title: "Attract and retain quality high paying customers",
-      date: "AUG 15, 2019",
-      category: "Business"
-    },
-    {
-      image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
-      title: "Solutions for all small and large businesses",
-      date: "AUG 15, 2019",
-      category: "Business"
-    },
-    {
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
-      title: "Future where technology creates good jobs",
-      date: "AUG 15, 2019",
-      category: "Business"
-    }
   ];
 
   useEffect(() => {
@@ -202,7 +173,7 @@ const Home: React.FC = () => {
       <section className="py-16 bg-slate-800 text-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            We are always happy to connect with industry peers, with supportive vendors, with creative researchers, and the good that see a potential to build a synergy with us!
+            We’re always happy to connect with industry peers, supportive vendors, and creative researchers who see potential for synergy.
           </h2>
           <Link
             to="/contact"

@@ -89,7 +89,7 @@ const sendEmail = async () => {
       {/* Contact Form & Info */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12" style={{alignItems: 'center'}}>
             {/* Contact Form */}
             <div>
               <div className="mb-8">
@@ -123,7 +123,7 @@ const sendEmail = async () => {
                       onChange={handleChange}
                       placeholder="Your Name"
                       required
-                      className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 bg-white border rounded-md text-sm transition-colors duration-300 ease-in-out focus:border-blue-500 focus:ring-0"
                     />
                   </div>
                   <div>
@@ -133,7 +133,7 @@ const sendEmail = async () => {
                       value={formData.company}
                       onChange={handleChange}
                       placeholder="Company Name"
-                      className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 bg-white border rounded-md text-sm transition-colors duration-300 ease-in-out focus:border-blue-500 focus:ring-0"
                     />
                   </div>
                 </div>
@@ -147,7 +147,7 @@ const sendEmail = async () => {
                       onChange={handleChange}
                       placeholder="Email Address"
                       required
-                      className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 bg-white border rounded-md text-sm transition-colors duration-300 ease-in-out focus:border-blue-500 focus:ring-0"
                     />
                   </div>
                   <div>
@@ -157,7 +157,7 @@ const sendEmail = async () => {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="Phone Number"
-                      className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 bg-white border rounded-md text-sm transition-colors duration-300 ease-in-out focus:border-blue-500 focus:ring-0"
                     />
                   </div>
                 </div>
@@ -167,9 +167,9 @@ const sendEmail = async () => {
                     name="product"
                     value={formData.product}
                     onChange={(e) => handleChange(e)}
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 bg-white border rounded-md text-sm transition-colors duration-300 ease-in-out focus:border-blue-500 focus:ring-0"
                   >
-                    <option value="">Select Product (Optional)</option>
+                    <option value="" disabled>Select Product (Optional)</option>
                     <option value="Ammonium Persulfate">Ammonium Persulfate</option>
                     <option value="Sodium Persulfate">Sodium Persulfate</option>
                     <option value="General Inquiry">General Inquiry</option>
@@ -184,17 +184,17 @@ const sendEmail = async () => {
                     placeholder="Write a Message"
                     rows={6}
                     required
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    className="w-full px-3 py-2 bg-white border rounded-md text-sm transition-colors duration-300 ease-in-out focus:border-blue-500 focus:ring-0"
                   />
                 </div>
                 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2"
+                  className="px-5 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed text-white text-sm rounded-md transition-colors duration-200 flex items-center gap-2 border border-transparent hover:border-blue-500 hover:bg-transparent hover:text-blue-500"
                 >
-                  <Send className="w-5 h-5" />
-                  <span>{isSubmitting ? 'SENDING...' : 'SEND A MESSAGE'}</span>
+                  <Send className="w-4 h-4" />
+                  <span className='text-base'>{isSubmitting ? 'Sending...' : 'Send'}</span>
                 </button>
               </form>
             </div>
@@ -206,7 +206,7 @@ const sendEmail = async () => {
                 <p className="text-gray-600">
                   PLOT NO. DP/123 GIDC SAYKHA,<br />
                   TA. VAGRA, DIST. BHARUCH,<br />
-                  GUJARAT – 392140
+                  GUJARAT - 392140
                 </p>
               </div>
               
@@ -230,22 +230,6 @@ const sendEmail = async () => {
                 </div>
               </div>
               
-              <div className="mt-8">
-                <div className="flex space-x-4">
-                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors cursor-pointer">
-                    <Facebook className="w-5 h-5" />
-                  </div>
-                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors cursor-pointer">
-                    <Twitter className="w-5 h-5" />
-                  </div>
-                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors cursor-pointer">
-                    <Instagram className="w-5 h-5" />
-                  </div>
-                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors cursor-pointer">
-                    <Linkedin className="w-5 h-5" />
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -260,27 +244,6 @@ const sendEmail = async () => {
                loading="lazy"
                width="100%"
                height="100%"></iframe>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* Business Hours */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Business Hours</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              We're here to help you during our business hours. For urgent matters, please call us directly.
-            </p>
-          </div>
-          
-          <div className="">
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-              <h3 className="text-xl font-semibold mb-4">Emergency Contact</h3>
-              <p className="text-gray-600">24/7 Available</p>
-              <p className="text-gray-900 font-semibold">+91 9428323829</p>
             </div>
           </div>
         </div>
