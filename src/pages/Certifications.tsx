@@ -9,21 +9,21 @@ const Certifications: React.FC = () => {
       description: 'Quality Management System',
       icon: <Award className="w-16 h-16 text-blue-600" />,
       details: 'Demonstrates our commitment to quality management and continuous improvement in all our processes.',
-      pdfUrl: 'https://www.iso.org/files/live/sites/isoorg/files/store/en/PUB100080.pdf'
+      pdfUrl: '/pdfs/iso-9001-certificate.pdf'
     },
     {
       name: 'ISO 14001',
       description: 'Environmental Management System',
       icon: <Shield className="w-16 h-16 text-green-600" />,
       details: 'Ensures we maintain the highest environmental standards and minimize our ecological footprint.',
-      pdfUrl: 'https://www.iso.org/files/live/sites/isoorg/files/store/en/PUB100441.pdf'
+      pdfUrl: '/pdfs/iso-14001-certificate.pdf'
     },
     {
       name: 'ISO 45001',
       description: 'Occupational Health & Safety',
       icon: <CheckCircle className="w-16 h-16 text-orange-600" />,
       details: 'Guarantees the safety and health of our workforce through comprehensive management systems.',
-      pdfUrl: 'https://www.iso.org/files/live/sites/isoorg/files/store/en/PUB100427.pdf'
+      pdfUrl: '/pdfs/iso-45001-certificate.pdf'
     }
   ];
 
