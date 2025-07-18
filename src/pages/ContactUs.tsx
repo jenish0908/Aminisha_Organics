@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Mail, Phone, MapPin, Send, Twitter, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Twitter, Facebook, Instagram, Linkedin, CheckCircle, AlertCircle } from 'lucide-react';
 
 const ContactUs: React.FC = () => {
   const location = useLocation();
@@ -16,6 +16,10 @@ const ContactUs: React.FC = () => {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -25,41 +29,54 @@ const ContactUs: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Create email content
-    const subject = formData.product 
-      ? `${formData.product} inquiry`
-      : 'General inquiry';
-    
-    const body = `
-Name: ${formData.name}
-Company: ${formData.company || 'Not provided'}
-Email: ${formData.email}
-Phone: ${formData.phone || 'Not provided'}
-Product Interest: ${formData.product || 'General inquiry'}
+    sendEmail();
+  };
 
-Message:
-${formData.message}
-    `.trim();
+  const sendEmail = async () => {
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify(formData)
+      });
 
-    // Create mailto link
-    const mailtoLink = `mailto:jpgajera7750@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
-    
-    // Show success message
-    alert('Thank you for your message! Your email client will open to send the inquiry.');
-    
-    // Reset form
-    setFormData({
-      name: '',
-      company: '',
-      email: '',
-      phone: '',
-      product: '',
-      message: ''
-    });
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setStatusMessage('Thank you for your message! We will get back to you soon.');
+        
+        // Reset form
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          phone: '',
+          product: preSelectedProduct,
+          message: ''
+        });
+      } else {
+        throw new Error(result.error || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitStatus('error');
+      setStatusMessage('Sorry, there was an error sending your message. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+      
+      // Clear status message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setStatusMessage('');
+      }, 5000);
+    }
   };
 
   return (
@@ -95,6 +112,22 @@ ${formData.message}
               </div>
               
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Status Message */}
+                {submitStatus !== 'idle' && (
+                  <div className={`p-4 rounded-lg flex items-center space-x-3 ${
+                    submitStatus === 'success' 
+                      ? 'bg-green-50 text-green-800 border border-green-200' 
+                      : 'bg-red-50 text-red-800 border border-red-200'
+                  }`}>
+                    {submitStatus === 'success' ? (
+                      <CheckCircle className="w-5 h-5" />
+                    ) : (
+                      <AlertCircle className="w-5 h-5" />
+                    )}
+                    <span>{statusMessage}</span>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <input
@@ -147,7 +180,7 @@ ${formData.message}
                   <select
                     name="product"
                     value={formData.product}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e as React.ChangeEvent<HTMLInputElement>)}
                     className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select Product (Optional)</option>
@@ -171,10 +204,11 @@ ${formData.message}
                 
                 <button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2"
+                  disabled={isSubmitting}
+                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2"
                 >
                   <Send className="w-5 h-5" />
-                  <span>SEND A MESSAGE</span>
+                  <span>{isSubmitting ? 'SENDING...' : 'SEND A MESSAGE'}</span>
                 </button>
               </form>
             </div>
