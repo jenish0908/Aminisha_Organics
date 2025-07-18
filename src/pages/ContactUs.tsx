@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, Twitter, Facebook, Instagram, Linkedin, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from 'emailjs-com';
+
 
 const ContactUs: React.FC = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const preSelectedProduct = searchParams.get('product') || '';
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [statusMessage, setStatusMessage] = useState('');
 
   const [formData, setFormData] = useState({
     name: '',
@@ -16,10 +22,6 @@ const ContactUs: React.FC = () => {
     message: ''
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [statusMessage, setStatusMessage] = useState('');
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -28,56 +30,40 @@ const ContactUs: React.FC = () => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    sendEmail();
+  e.preventDefault();
+  sendEmail();
+};
+
+const sendEmail = async () => {
+  setIsSubmitting(true);
+  setSubmitStatus('idle');
+
+  const serviceId = 'service_ruk981h';
+  const templateId = 'template_1s8yn8n';
+  const publicKey = 'Cjhuqw5Qd1aozy-6j';
+
+  const templateParams = {
+    name: formData.name,
+    company: formData.company,
+    email: formData.email,
+    phone: formData.phone,
+    product: formData.product || 'General Inquiry',
+    message: formData.message,
   };
 
-  const sendEmail = async () => {
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-    
-    try {
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setStatusMessage('Thank you for your message! We will get back to you soon.');
-        
-        // Reset form
-        setFormData({
-          name: '',
-          company: '',
-          email: '',
-          phone: '',
-          product: preSelectedProduct,
-          message: ''
-        });
-      } else {
-        throw new Error(result.error || 'Failed to send message');
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-      setSubmitStatus('error');
-      setStatusMessage('Sorry, there was an error sending your message. Please try again or contact us directly.');
-    } finally {
-      setIsSubmitting(false);
-      
-      // Clear status message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus('idle');
-        setStatusMessage('');
-      }, 5000);
-    }
-  };
+  try {
+    const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
+    console.log('SUCCESS!', response.status, response.text);
+    setSubmitStatus('success');
+    setStatusMessage('Your message was sent successfully!');
+  } catch (err) {
+    console.error('FAILED...', err);
+    setSubmitStatus('error');
+    setStatusMessage('Something went wrong. Please try again later.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="min-h-screen">
@@ -180,7 +166,7 @@ const ContactUs: React.FC = () => {
                   <select
                     name="product"
                     value={formData.product}
-                    onChange={(e) => handleChange(e as React.ChangeEvent<HTMLInputElement>)}
+                    onChange={(e) => handleChange(e)}
                     className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select Product (Optional)</option>
@@ -269,18 +255,16 @@ const ContactUs: React.FC = () => {
       <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="h-96 bg-gray-200 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600">Interactive Map</p>
-                <p className="text-sm text-gray-500">
-                  PLOT NO. DP/123 GIDC SAYKHA, TA. VAGRA, DIST. BHARUCH, GUJARAT – 392140
-                </p>
-              </div>
+            <div className="h-96">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3704.450035246981!2d72.81558237600568!3d21.801536160787453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f85add7072165%3A0xff2509edb8c8e0ed!2sAMINISHA%20ORGANICS%20LLP!5e0!3m2!1sen!2sin!4v1752825313187!5m2!1sen!2sin"
+               loading="lazy"
+               width="100%"
+               height="100%"></iframe>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Business Hours */}
       <section className="py-16">
@@ -292,19 +276,7 @@ const ContactUs: React.FC = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-              <h3 className="text-xl font-semibold mb-4">Office Hours</h3>
-              <p className="text-gray-600">Monday - Friday</p>
-              <p className="text-gray-900 font-semibold">9:00 AM - 6:00 PM</p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-              <h3 className="text-xl font-semibold mb-4">Customer Support</h3>
-              <p className="text-gray-600">Monday - Saturday</p>
-              <p className="text-gray-900 font-semibold">8:00 AM - 8:00 PM</p>
-            </div>
-            
+          <div className="">
             <div className="bg-white p-6 rounded-lg shadow-lg text-center">
               <h3 className="text-xl font-semibold mb-4">Emergency Contact</h3>
               <p className="text-gray-600">24/7 Available</p>

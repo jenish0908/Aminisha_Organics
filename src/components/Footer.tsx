@@ -41,14 +41,12 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Company Links */}
-          <div>
+          <div style={{paddingLeft: '55px'}}>
             <h4 className="text-lg font-semibold mb-4">Company</h4>
             <ul className="space-y-2">
               <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Home</Link></li>
               <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/products" className="text-gray-300 hover:text-white transition-colors">Products</Link></li>
-              <li><Link to="#" className="text-gray-300 hover:text-white transition-colors">Gallery</Link></li>
-              <li><Link to="#" className="text-gray-300 hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact Us</Link></li>
             </ul>
           </div>
@@ -76,7 +74,7 @@ const Footer: React.FC = () => {
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mt-1">
+                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mt-1" style={{width: '25%'}}>
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>

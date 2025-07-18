@@ -24,12 +24,6 @@ const Header: React.FC = () => {
               <span>info@aminishaorganics.com</span>
             </div>
           </div>
-          <div className="flex items-center space-x-3 mt-2 sm:mt-0">
-            <Twitter className="w-4 h-4 hover:text-blue-200 cursor-pointer transition-colors" />
-            <Facebook className="w-4 h-4 hover:text-blue-200 cursor-pointer transition-colors" />
-            <Instagram className="w-4 h-4 hover:text-blue-200 cursor-pointer transition-colors" />
-            <Linkedin className="w-4 h-4 hover:text-blue-200 cursor-pointer transition-colors" />
-          </div>
         </div>
       </div>
 
@@ -53,13 +47,13 @@ const Header: React.FC = () => {
             <nav className="hidden lg:flex items-center space-x-8">
               <Link 
                 to="/" 
-                className={`text-gray-700 hover:text-blue-600 transition-colors font-medium ${isActive('/') ? 'text-blue-600' : ''}`}
+                className={`text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg ${isActive('/') ? 'text-blue-600' : ''}`}
               >
                 Home
               </Link>
               <Link 
                 to="/about" 
-                className={`text-gray-700 hover:text-blue-600 transition-colors font-medium ${isActive('/about') ? 'text-blue-600' : ''}`}
+                className={`text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg ${isActive('/about') ? 'text-blue-600' : ''}`}
               >
                 About Us
               </Link>
@@ -69,7 +63,7 @@ const Header: React.FC = () => {
                 <button
                   onMouseEnter={() => setIsProductsOpen(true)}
                   onMouseLeave={() => setIsProductsOpen(false)}
-                  className={`flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors font-medium ${location.pathname.includes('/products') ? 'text-blue-600' : ''}`}
+                  className={`flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg ${location.pathname.includes('/products') ? 'text-blue-600' : ''}`}
                 >
                   <span>Products</span>
                   <ChevronDown className="w-4 h-4" />
@@ -99,25 +93,22 @@ const Header: React.FC = () => {
 
               <Link 
                 to="/certifications" 
-                className={`text-gray-700 hover:text-blue-600 transition-colors font-medium ${isActive('/certifications') ? 'text-blue-600' : ''}`}
+                className={`text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg ${isActive('/certifications') ? 'text-blue-600' : ''}`}
               >
                 Certifications
               </Link>
               <Link 
                 to="/contact" 
-                className={`text-gray-700 hover:text-blue-600 transition-colors font-medium ${isActive('/contact') ? 'text-blue-600' : ''}`}
+                className={`text-gray-700 hover:text-blue-600 transition-colors font-medium text-lg ${isActive('/contact') ? 'text-blue-600' : ''}`}
               >
                 Contact Us
               </Link>
             </nav>
 
             {/* Call Anytime Button */}
-            <div className="hidden lg:flex items-center space-x-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <Phone className="w-5 h-5" />
-              <div>
-                <div className="text-sm font-semibold">Call Anytime</div>
-                <div className="text-xs font-medium opacity-90">+91 9428323829</div>
-              </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Phone className="w-4 h-4 text-lg" />
+              <span className='text-lg'>+91 9428323829</span>
             </div>
 
             {/* Mobile Menu Button */}
@@ -175,11 +166,11 @@ const Header: React.FC = () => {
                 >
                   Contact Us
                 </Link>
-                <div className="flex items-center space-x-3 bg-blue-600 text-white px-6 py-3 rounded-full">
+                <div className="flex items-center gap-3 bg-white border border-blue-600 text-blue-600 px-5 py-2 rounded-xl shadow-sm">
                   <Phone className="w-5 h-5" />
                   <div>
-                    <div className="text-sm font-medium">Call Anytime</div>
-                    <div className="text-xs">+91 9428323829</div>
+                    <div className="text-sm font-semibold">Call Anytime</div>
+                    <div className="text-xs text-gray-500">+91 9428323829</div>
                   </div>
                 </div>
               </nav>

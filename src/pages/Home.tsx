@@ -297,40 +297,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* News & Articles */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">News & Articles</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {news.map((article, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {article.category}
-                  </span>
-                  <h3 className="text-lg font-semibold mt-4 mb-2">{article.title}</h3>
-                  <p className="text-gray-500 text-sm mb-4">{article.date}</p>
-                  <Link
-                    to="#"
-                    className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center space-x-2"
-                  >
-                    <span>READ MORE</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
