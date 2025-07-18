@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Award, Shield, CheckCircle } from 'lucide-react';
+import { Award, Shield, CheckCircle, Download, ExternalLink } from 'lucide-react';
 
 const Certifications: React.FC = () => {
   const certifications = [
@@ -8,21 +8,29 @@ const Certifications: React.FC = () => {
       name: 'ISO 9001',
       description: 'Quality Management System',
       icon: <Award className="w-16 h-16 text-blue-600" />,
-      details: 'Demonstrates our commitment to quality management and continuous improvement in all our processes.'
+      details: 'Demonstrates our commitment to quality management and continuous improvement in all our processes.',
+      pdfUrl: 'https://www.iso.org/files/live/sites/isoorg/files/store/en/PUB100080.pdf'
     },
     {
       name: 'ISO 14001',
       description: 'Environmental Management System',
       icon: <Shield className="w-16 h-16 text-green-600" />,
-      details: 'Ensures we maintain the highest environmental standards and minimize our ecological footprint.'
+      details: 'Ensures we maintain the highest environmental standards and minimize our ecological footprint.',
+      pdfUrl: 'https://www.iso.org/files/live/sites/isoorg/files/store/en/PUB100441.pdf'
     },
     {
       name: 'ISO 45001',
       description: 'Occupational Health & Safety',
       icon: <CheckCircle className="w-16 h-16 text-orange-600" />,
-      details: 'Guarantees the safety and health of our workforce through comprehensive management systems.'
+      details: 'Guarantees the safety and health of our workforce through comprehensive management systems.',
+      pdfUrl: 'https://www.iso.org/files/live/sites/isoorg/files/store/en/PUB100427.pdf'
     }
   ];
+
+  const handlePdfClick = (pdfUrl: string, certName: string) => {
+    // Open PDF in new tab
+    window.open(pdfUrl, '_blank');
+  };
 
   return (
     <div className="min-h-screen">
@@ -57,13 +65,29 @@ const Certifications: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {certifications.map((cert, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+              <div key={index} className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-all duration-300 group cursor-pointer">
                 <div className="flex justify-center mb-6">
                   {cert.icon}
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{cert.name}</h3>
                 <p className="text-gray-600 mb-4">{cert.description}</p>
                 <p className="text-sm text-gray-500 leading-relaxed">{cert.details}</p>
+                <div className="mt-6 space-y-3">
+                  <button
+                    onClick={() => handlePdfClick(cert.pdfUrl, cert.name)}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center space-x-2 group-hover:bg-blue-700"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>View Certificate</span>
+                  </button>
+                  <button
+                    onClick={() => handlePdfClick(cert.pdfUrl, cert.name)}
+                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center space-x-2"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download PDF</span>
+                  </button>
+                </div>
               </div>
             ))}
           </div>
