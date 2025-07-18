@@ -116,7 +116,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 </div>
               </div>
               <Link
-                to="/contact"
+                to={`/contact?product=${encodeURIComponent(currentProduct.name)}`}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2"
               >
                 <span>Get Quote</span>
@@ -235,7 +235,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/contact"
+              to={`/contact?product=${encodeURIComponent(currentProduct.name)}`}
               className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors inline-block"
             >
               Request Quote

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, Twitter, Facebook, Instagram, Linkedin } from 'lucide-react';
 
 const ContactUs: React.FC = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const preSelectedProduct = searchParams.get('product') || '';
+
   const [formData, setFormData] = useState({
     name: '',
     company: '',
     email: '',
     phone: '',
+    product: preSelectedProduct,
     message: ''
   });
 
@@ -20,14 +25,39 @@ const ContactUs: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
+    
+    // Create email content
+    const subject = formData.product 
+      ? `${formData.product} inquiry`
+      : 'General inquiry';
+    
+    const body = `
+Name: ${formData.name}
+Company: ${formData.company || 'Not provided'}
+Email: ${formData.email}
+Phone: ${formData.phone || 'Not provided'}
+Product Interest: ${formData.product || 'General inquiry'}
+
+Message:
+${formData.message}
+    `.trim();
+
+    // Create mailto link
+    const mailtoLink = `mailto:jpgajera7750@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Show success message
+    alert('Thank you for your message! Your email client will open to send the inquiry.');
+    
+    // Reset form
     setFormData({
       name: '',
       company: '',
       email: '',
       phone: '',
+      product: '',
       message: ''
     });
   };
@@ -111,6 +141,20 @@ const ContactUs: React.FC = () => {
                       className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
+                </div>
+                
+                <div>
+                  <select
+                    name="product"
+                    value={formData.product}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="">Select Product (Optional)</option>
+                    <option value="Ammonium Persulfate">Ammonium Persulfate</option>
+                    <option value="Sodium Persulfate">Sodium Persulfate</option>
+                    <option value="General Inquiry">General Inquiry</option>
+                  </select>
                 </div>
                 
                 <div>

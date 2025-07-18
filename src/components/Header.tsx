@@ -112,11 +112,11 @@ const Header: React.FC = () => {
             </nav>
 
             {/* Call Anytime Button */}
-            <div className="hidden lg:flex items-center space-x-3 bg-blue-600 text-white px-6 py-3 rounded-full">
+            <div className="hidden lg:flex items-center space-x-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               <Phone className="w-5 h-5" />
               <div>
-                <div className="text-sm font-medium">Call Anytime</div>
-                <div className="text-xs">+91 9428323829</div>
+                <div className="text-sm font-semibold">Call Anytime</div>
+                <div className="text-xs font-medium opacity-90">+91 9428323829</div>
               </div>
             </div>
 
