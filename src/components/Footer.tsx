@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <img 
-                src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" 
+                src="/Logo/Aminisha short Logo.png" 
                 alt="Aminisha Organics" 
                 className="w-10 h-10 rounded-full object-cover"
               />

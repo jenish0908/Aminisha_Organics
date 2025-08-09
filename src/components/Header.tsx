@@ -34,12 +34,12 @@ const Header: React.FC = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <img 
-                src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" 
+                src="/Logo/Aminisha short Logo.png" 
                 alt="Aminisha Organics" 
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <h1 className="text-xl font-bold text-green-600">Aminisha Organics LLP</h1>
+                <h1 className="text-md font-bold text-green-600">Aminisha <br></br>Organics</h1>
               </div>
             </Link>
 
@@ -108,7 +108,7 @@ const Header: React.FC = () => {
             {/* Call Anytime Button */}
             <div className="flex items-center gap-2 text-sm">
               <Phone className="w-4 h-4 text-lg" />
-              <span className='text-lg'>+91 9428323829</span>
+              <span className='text-lg'>9428323829</span>
             </div>
 
             {/* Mobile Menu Button */}
